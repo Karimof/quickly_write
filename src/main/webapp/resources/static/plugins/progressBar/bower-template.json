@@ -1,0 +1,21 @@
+{
+  "name": "<%= pkg.name %>",
+  "version": "<%= pkg.version %>",
+  "main": "dist/jquery.countdown360.js",
+  "ignore": [
+    "demo",
+    "src",
+    ".editorconfig",
+    ".jshintrc",
+    ".gitignore",
+    ".travis.yml",
+    "bower-template.json",
+    "CONTRIBUTING.md",
+    "contdown360.jquery.json",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": ">=1.4"
+  }
+}

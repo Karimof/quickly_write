@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="../../resources/static/css/loginForm.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+<div>
+    <div align="center" style="margin-top: 15%;">
+        <form action="/register" method="post">
+            <h3>Ro'yhatdan o'tish</h3>
+            <p th:text="${message}"></p>
+            <input name="fullName" placeholder="Ism Familiya" type="text"><br>
+            <input name="userName" placeholder="Login" type="text"><br>
+            <input name="email" placeholder="masalan@gmail.com" type="email"><br>
+            <input name="password" placeholder="Parol" type="password"><br>
+            <input name="checkPassword" placeholder="Parolni takrorlang" type="password"><br>
+            <button type="submit">Ok</button>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
