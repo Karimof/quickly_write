@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Guruh</title>
-</head>
-<body>
-<div>
-    Name = <span th:text="${name}"></span>
-    <table>
-        <tr>
-            <td>
-                <h1>Yangi guruh yarating yoki qo'shiling</h1>
-                <p th:text="${message}"></p>
-                <form action="/guruhWindow" method="get">
-                    <input name="name" placeholder="Guruh nomi" type="text">
-                    <input name="password" placeholder="Parol" type="text"><br>
-                    <button type="submit">Ok</button>
-                </form>
-            </td>
+<div th:fragment="content" align="center">
+    <h1>Yangi guruh yarating yoki qo'shiling</h1>
 
-        </tr>
-    </table>
+    <div style=" width: 500px">
+        <p th:text="${message}"></p>
+        <form action="/guruhWindow" method="get">
+            <input class="form-control" name="name" placeholder="Guruh nomi" type="text"><br>
+            <input class="form-control" name="password" placeholder="Guruh paroli" type="text"><br>
+            <button type="submit" class="btn btn-info">Saqlash</button>
+        </form>
+    </div>
 </div>
-</body>
-</html>

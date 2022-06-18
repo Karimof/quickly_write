@@ -32,7 +32,10 @@ public class SinovController {
     public String sinov(Model model, HttpServletRequest request) {
         groupService.deleteGroup(request);
         model.addAttribute("text", sinovService.findByRandomId().getText());
-        return "sinov";
+        User user = (User) request.getSession().getAttribute("user");
+        model.addAttribute("userName", ((User) request.getSession().getAttribute("user")).getUserName());
+        model.addAttribute("content", "sinov");
+        return "fragments/layout";
     }
 
     @GetMapping("/guruh")
@@ -40,7 +43,8 @@ public class SinovController {
         groupService.deleteGroup(request);
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("userName", user.getUserName());
-        return "guruh";
+        model.addAttribute("content", "guruh");
+        return "fragments/layout";
     }
 
     @GetMapping("/guruhWindow")
@@ -53,10 +57,12 @@ public class SinovController {
             model.addAttribute("userNames", userNames);
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("text", sinovService.findByRandomId().getText());
-            return "guruhmusoboqasi";
+            model.addAttribute("content", "guruhmusoboqasi");
+            return "fragments/layout";
         } else {
             model.addAttribute("message", "Bunday nomli guruh mavjud. Yoki parol hato!");
-            return "guruh";
+            model.addAttribute("content", "guruh");
+            return "fragments/layout";
         }
     }
 }

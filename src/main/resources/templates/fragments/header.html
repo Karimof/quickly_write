@@ -1,0 +1,50 @@
+﻿<div th:fragment="header" class="row" style="background:grey">
+    <div class="col-2">
+        <a href="/">
+            <button class="btn btn-outline-light" style="font-size: 20pt">
+                Tezyozish.uz
+            </button>
+        </a>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-4">
+                <a href="sinov">
+                    <button class="btn btn-info">Sinov rejimi</button>
+                </a>
+            </div>
+            <div class="col-4">
+                <a href="guruh">
+                    <button class="btn btn-info">Guruh rejimi</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-2">
+
+    </div>
+    <div class="col-1">
+        <a href="profil"
+           th:style="'visibility:' + ${visibility}">
+            <button class="btn btn-dark" th:text="${userName}"></button>
+        </a>
+    </div>
+    <div class="col-2">
+        <a href="register_form">
+            <button class="btn btn-info">Ro'yhatdan o'tish</button>
+        </a>
+    </div>
+    <div class="col-1">
+        <a href="/login">
+            <button class="btn btn-info">Kirish</button>
+        </a>
+    </div>
+
+    <!--    <div class="col-2">-->
+    <!--        <span th:text="#{lang.change}"></span>:-->
+    <!--        <select class="form-check-label" id="locales">-->
+    <!--            <option th:label="#{lang.ru}" value="ru"></option>-->
+    <!--            <option th:label="#{lang.uz}" value="uz"></option>-->
+    <!--        </select>-->
+    <!--    </div>-->
+</div>

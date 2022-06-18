@@ -66,15 +66,15 @@ public class UserService {
 
     public Model isLoginned(HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
-        String visiblity = "hidden";
         if (user != null) {
             groupService.deleteGroup(request);
-            visiblity = "visible";
             model.addAttribute("userName", user.getUserName());
-            model.addAttribute("visiblity", visiblity);
+            model.addAttribute("visibility", "visible");
+            model.addAttribute("forHiddenButton", "hidden");
 
         } else {
-            model.addAttribute("visiblity", visiblity);
+            model.addAttribute("visibility", "hidden");
+            model.addAttribute("forHiddenButton", "visible");
             model.addAttribute("userName", "");
         }
         return model;

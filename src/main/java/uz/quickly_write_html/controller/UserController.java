@@ -27,26 +27,31 @@ public class UserController {
     @GetMapping({"", "/", "/index"})
     public String index(HttpServletRequest request, Model model) {
         userService.isLoginned(request, model);
-        return "index";
+        model.addAttribute("content", "index");
+        return "fragments/layout";
     }
 
     @GetMapping("/register_form")
     public String regForm(Model model) {
         model.addAttribute("message", "");
-        return "register_form";
+        model.addAttribute("content", "register_form");
+        return "fragments/layout";
     }
 
     @PostMapping(value = "/register")
     public String add(UserDto newUser, Model model) {
         // TODO index ni o'rniga redirect ishlatish kerak.
         model.addAttribute("fullName", newUser.getFullName());
-        return userService.addUser(newUser, model) ? "index" : "register_form";
+        model.addAttribute(userService.addUser(newUser, model) ? "index" : "register_form");
+        model.addAttribute("content", "register");
+        return "fragments/layout";
     }
 
-    @GetMapping(value = "/login_form")
+    @GetMapping(value = "/login")
     public String log_form(Model model) {
         model.addAttribute("message", "");
-        return "login_form";
+        model.addAttribute("content", "login_form");
+        return "fragments/layout";
     }
 
     @PostMapping(value = "/login")
@@ -55,9 +60,11 @@ public class UserController {
                         Model model, HttpServletRequest request) {
         boolean passed = userService.loginService(userName, password, model, request);
         if (passed) {
-            return "index";
+            model.addAttribute("content", "index");
+            return "fragments/layout";
         } else
             model.addAttribute("message", "Login yoki parol hato!");
-        return "login_form";
+        model.addAttribute("content", "login_form");
+        return "fragments/layout";
     }
 }

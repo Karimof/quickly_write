@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="webjars/bootstrap/5.1.3/css/bootstrap.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!--THIS for sinov.html-->
+    <script src="../../static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>
+    <style>
+        #typingPlace:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="fragments/header.html::header">This is header.html content</div>
+<div th:replace="${content + '.html'}::content">This is index.html content</div>
+<div th:replace="fragments/footer.html::footer">This is footer.html content</div>
+
+</body>
+</html>

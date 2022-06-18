@@ -1,31 +1,11 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>
-        Registratsiya
-    </title>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <link href="../../resources/static/css/loginForm.css" rel="stylesheet" type="text/css">
-
-</head>
-
-<body>
-<div>
-    <div align="center" style="margin-top: 15%;">
+<div th:fragment="content" align="center">
+    <div style="margin-top: 10%; width: 300px">
         <form action="/login" method="post">
-
             <h3 th:text="#{userlogin}"></h3>
-
             <h5 align="center" style="color: red" th:text="${message}"></h5>
-
             <input class="form-control" name="userName" placeholder="Enter your userName" type="text"><br>
             <input class="form-control" name="password" placeholder="Enter Password" type="text"><br>
             <button class="btn btn-success" type="submit">Enter</button>
         </form>
     </div>
 </div>
-</body>
-
-</html>

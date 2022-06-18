@@ -1,132 +1,99 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-    <script src="../../resources/static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>
-    <style>
-        #typingPlace {
-            /*border-color: white;*/
-            border-bottom-color: #118170;
-            border: 3px solid;
-            border-bottom-right-radius: 2px;
-            border-bottom-left-radius: 2px;
-            border-left-color: transparent;
-            border-right-color: transparent;
-            border-top-color: transparent;
-        }
-
-        #typingPlace:focus {
-            outline: none;
-        }
-    </style>
-
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-
-</head>
-<body style="min-height: 600px; background-color: white">
-
-<div id="result"
-     style=" text-align:center; width: 500px; height: 200px;position: absolute; margin-left: 420px; border-radius: 30px    ">
-    <p id="pResult"
-       style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
-
-    </p>
-</div>
-<!--TIMER-->
-<div id="container">
-    <div id="countdown">
-        <canvas height="150" id="countdown360_countdown" width="150"><span aria-live="assertive" id="countdown-text"
-                                                                           role="status"></span></canvas>
-    </div>
-</div>
-
-<div>
-    <!--    INPUT FIELD-->
-    <label for="typingPlace"></label><input id="typingPlace" name="typingPlace"
-                                            style="width: 20%;padding: 5px; font-size: 22pt;margin-left: 530px;margin-top: 50px;"
-                                            type="text">
-    <div>
-        <!--        TYPED VALUES-->
-        <p id="values"
-           style="font-size: 20pt;user-select: none;font-family: Quicksand;position: absolute;margin: 100px; z-index: 100; color: #3fd942;background-color: rgba(255,255,255,0)"></p>
-
-        <!--        MAIN TEXT-->
-        <p id="orgText"
-           style="font-size: 20pt; -webkit-user-select: all; user-select: none; font-family: Quicksand; margin: 100px; position: absolute; color: #484747; z-index: 0"
-           th:text="${text}">
+<div th:fragment="content" style="min-height: 500px; background-color: white">
+    <div
+            style=" text-align:center; width: 500px; margin-left: 420px; border-radius: 30px    ">
+        <p id="result"
+           style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
 
         </p>
     </div>
+    <!--TIMER-->
+    <div id="container" style="position: absolute; top: 100px">
+        <div id="countdown">
+            <canvas height="150" id="countdown360_countdown" width="150"><span aria-live="assertive" id="countdown-text"
+                                                                               role="status"></span></canvas>
+        </div>
+    </div>
+
+    <div>
+        <!--    INPUT FIELD-->
+        <input id="typingPlace" name="typingPlace"
+               style="width: 20%;padding: 5px; font-size: 22pt;margin-left: 530px;
+                border-bottom-right-radius: 2px;
+                border-bottom-left-radius: 2px;
+                border: 3px solid transparent;
+                border-bottom-color: #118170;"
+               type="text">
+        <div>
+            <!--TYPED VALUES-->
+            <p id="values"
+               style="font-size: 20pt;user-select: none;font-family: Quicksand;position: absolute;margin: 0 100px 0 100px; z-index: 100; color: #3fd942;background-color: rgba(255,255,255,0)"></p>
+
+            <!--MAIN TEXT-->
+            <p id="orgText"
+               style="font-size: 20pt; -webkit-user-select: all; user-select: none; font-family: Quicksand; margin: 0 100px 0 100px; position: absolute; color: #484747; z-index: 0"
+               th:text="${text}">
+
+            </p>
+        </div>
+        <!--INPUT FIELD SCRIPTS-->
+        <script>
+            const input = document.getElementById("typingPlace");
+            const result = document.getElementById("result");
+            const successed = document.getElementById('values');
+            var mainText = document.getElementById("orgText");
+            var orgText = mainText.textContent.trim().split(' ');
+
+            input.focus();
+            input.addEventListener('input', updateValue);
+            let cntCorrectWords = 0;
+            let cntChanging = 0;
+
+            function updateValue(e) {
+                cntChanging++;
+                if (cntChanging === 1) {
+                    countdown.start();
+                }
+                let text = e.target.value;
+                if (orgText[0].startsWith(text.trim())) {
+                    input.style.color = 'green';
+                } else {
+                    input.style.color = 'red';
+                }
+                if (text.endsWith(' ') && text.trim() === orgText[0]) {
+                    orgText.shift()
+                    successed.textContent = successed.textContent + ' ' + text.trim();
+                    input.value = '';
+                    cntCorrectWords++;
+                    console.log(orgText);
+                }
+            }
+        </script>
+
+        <!--PROGRESS BAR SCRIPTS-->
+        <script charset="utf-8" type="text/javascript">
+            var countdown = $("#countdown").countdown360({
+
+                radius: 70,                    // radius of arc
+                strokeStyle: "#070707",          // the color of the stroke
+                strokeWidth: undefined,          // the stroke width, dynamically calulated if omitted in options
+                fillStyle: "#8ac575",            // the fill color
+                fontColor: "#477050",            // the font color
+                fontFamily: "sans-serif",        // the font family
+                fontSize: undefined,             // the font size, dynamically calulated if omitted in options
+                fontWeight: 700,                 // the font weight
+                autostart: false,                 // start the countdown automatically
+                seconds: 60,                     // the number of seconds to count down
+                label: ["second", "seconds"],    // the label to use or false if none
+                startOverAfterAdding: true,      // Start the timer over after time is added with addSeconds
+                smooth: true,                   // should the timer be smooth or stepping
+                onComplete: function () {
+                    input.setAttribute("readonly", "true");
+                    result.textContent = "Yozish tezligingiz : " + cntCorrectWords + " WPM";
+                    result.style.background = 'rgba(13,234,17,0.2)';
+                }
+            });
+        </script>
+    </div>
+
+
 </div>
-
-
-<!--INPUT FIELD SCRIPTS-->
-<script>
-    const input = document.getElementById("typingPlace");
-    const pResult = document.getElementById("pResult");
-    const successed = document.getElementById('values');
-    var mainText = document.getElementById("orgText");
-    var orgText = mainText.textContent.trim().split(' ');
-
-    input.focus();
-    input.addEventListener('input', updateValue);
-    let cntCorrectWords = 0;
-    let cntChanging = 0;
-
-    function updateValue(e) {
-        cntChanging++;
-        if (cntChanging === 1) {
-            countdown.start();
-        }
-        let text = e.target.value;
-        if (orgText[0].startsWith(text.trim())) {
-            input.style.color = 'green';
-        } else {
-            input.style.color = 'red';
-        }
-        if (text.endsWith(' ') && text.trim() === orgText[0]) {
-            orgText.shift()
-            successed.textContent = successed.textContent + ' ' + text.trim();
-            input.value = '';
-            cntCorrectWords++;
-            console.log(orgText);
-        }
-    }
-</script>
-
-<script>
-
-</script>
-
-<!--PROGRESS BAR SCRIPTS-->
-<script charset="utf-8" type="text/javascript">
-    var countdown = $("#countdown").countdown360({
-
-        radius: 70,                    // radius of arc
-        strokeStyle: "#070707",          // the color of the stroke
-        strokeWidth: undefined,          // the stroke width, dynamically calulated if omitted in options
-        fillStyle: "#8ac575",            // the fill color
-        fontColor: "#477050",            // the font color
-        fontFamily: "sans-serif",        // the font family
-        fontSize: undefined,             // the font size, dynamically calulated if omitted in options
-        fontWeight: 700,                 // the font weight
-        autostart: false,                 // start the countdown automatically
-        seconds: 60,                     // the number of seconds to count down
-        label: ["second", "seconds"],    // the label to use or false if none
-        startOverAfterAdding: true,      // Start the timer over after time is added with addSeconds
-        smooth: true,                   // should the timer be smooth or stepping
-        onComplete: function () {
-            input.setAttribute("readonly", "true");
-            pResult.textContent = "Yozish tezligingiz : " + cntCorrectWords + " WPM";
-            pResult.style.background = 'rgba(13,234,17,0.2)';
-        }
-    });
-</script>
-</body>
-</html>
