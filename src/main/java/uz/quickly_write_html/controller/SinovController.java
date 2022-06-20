@@ -9,6 +9,7 @@ import uz.quickly_write_html.entitiy.User;
 import uz.quickly_write_html.repository.UserRepo;
 import uz.quickly_write_html.service.GroupService;
 import uz.quickly_write_html.service.SinovService;
+import uz.quickly_write_html.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,17 +21,22 @@ public class SinovController {
     SinovService sinovService;
     final
     GroupService groupService;
+
+    final
+    UserService userService;
     @Autowired //TODO Remove here the userRepo
     UserRepo repoUser;
 
-    public SinovController(SinovService sinovService, GroupService groupService) {
+    public SinovController(SinovService sinovService, GroupService groupService, UserService userService) {
         this.sinovService = sinovService;
         this.groupService = groupService;
+        this.userService = userService;
     }
 
     @GetMapping("/sinov")
     public String sinov(Model model, HttpServletRequest request) {
         groupService.deleteGroup(request);
+        userService.isLoginned(request, model);
         model.addAttribute("text", sinovService.findByRandomId().getText());
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("userName", ((User) request.getSession().getAttribute("user")).getUserName());
@@ -41,6 +47,7 @@ public class SinovController {
     @GetMapping("/guruh")
     public String guruhUrl(HttpServletRequest request, Model model) {
         groupService.deleteGroup(request);
+        userService.isLoginned(request, model);
         User user = (User) request.getSession().getAttribute("user");
         model.addAttribute("userName", user.getUserName());
         model.addAttribute("content", "guruh");
@@ -50,6 +57,7 @@ public class SinovController {
     @GetMapping("/guruhWindow")
     public String guruh(Group group, HttpServletRequest request, Model model) {
         List<String> userNames = groupService.addToGroup(group, request);
+        userService.isLoginned(request, model);
         if (userNames != null) {
             User currentUser = (User) request.getSession().getAttribute("user");
             model.addAttribute("gName", group.getName());

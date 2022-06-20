@@ -1,6 +1,8 @@
 package uz.quickly_write_html.service;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import uz.quickly_write_html.entitiy.User;
 import uz.quickly_write_html.model.UserDto;
 import uz.quickly_write_html.repository.GroupRepo;
@@ -8,10 +10,18 @@ import uz.quickly_write_html.repository.TextRepo;
 import uz.quickly_write_html.repository.UserRepo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.Optional;
+import java.util.UUID;
 
 
 public class UserService {
+    private static final String uploadDir = "yuklanganlar";
     final
     UserRepo userRepo;
     final
@@ -28,7 +38,9 @@ public class UserService {
         this.groupService = groupService;
     }
 
-    public boolean addUser(UserDto newUser, Model model) {
+    public boolean addUser(UserDto newUser, Model model,
+                           MultipartHttpServletRequest multipart,
+                           HttpServletRequest request) throws IOException {
         String message = "";
         if (userRepo.existsUserByUserName(newUser.getUserName())) {
             message = "Bunday foydalanuvchi mavjud!";
@@ -36,9 +48,29 @@ public class UserService {
             return false;
         }
         if (newUser.getPassword().equals(newUser.getCheckPassword())) {
-            User user = new User(newUser.getFullName(), newUser.getUserName(), newUser.getEmail(), newUser.getPassword());
+            // here comes user photo
+            Iterator<String> fileNames = multipart.getFileNames();
+            MultipartFile file = multipart.getFile(fileNames.next());
+            User user = new User();
+            if (file != null) {
+                String fullOrgName = file.getOriginalFilename();
+
+                String[] split = fullOrgName.split("\\.");
+                String hashName = UUID.randomUUID().toString() + "." + split[split.length - 1];
+                user.setPhotoName(hashName);
+
+                Path path = Paths.get("uploads/photos/" + hashName);
+                InputStream inputStream = file.getInputStream();
+                Files.copy(inputStream, path);
+                user.setPhotoName(hashName);
+            }
+            user.setFullName(newUser.getFullName());
+            user.setUserName(newUser.getUserName());
+            user.setEmail(newUser.getEmail());
+            user.setPassword(newUser.getPassword());
             userRepo.save(user);
-            message = "Muvaffaqqiyatli ro'yhatdan o'tdingiz.";
+            message = "Muvaffaqqiyatli ro'yhatdan o'tdingiz va tizimga kirdingiz. ";
+            request.getSession().setAttribute("user", user);
             model.addAttribute("message", message);
             return true;
         }
@@ -69,12 +101,12 @@ public class UserService {
         if (user != null) {
             groupService.deleteGroup(request);
             model.addAttribute("userName", user.getUserName());
-            model.addAttribute("visibility", "visible");
-            model.addAttribute("forHiddenButton", "hidden");
+            model.addAttribute("display", "");
+            model.addAttribute("displayButton", "none");
 
         } else {
-            model.addAttribute("visibility", "hidden");
-            model.addAttribute("forHiddenButton", "visible");
+            model.addAttribute("display", "none");
+            model.addAttribute("displayButton", "");
             model.addAttribute("userName", "");
         }
         return model;

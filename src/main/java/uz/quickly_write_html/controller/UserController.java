@@ -5,11 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import uz.quickly_write_html.model.UserDto;
 import uz.quickly_write_html.service.GroupService;
 import uz.quickly_write_html.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Controller
 public class UserController {
@@ -32,23 +34,26 @@ public class UserController {
     }
 
     @GetMapping("/register_form")
-    public String regForm(Model model) {
+    public String regForm(HttpServletRequest request, Model model) {
+        userService.isLoginned(request, model);
         model.addAttribute("message", "");
         model.addAttribute("content", "register_form");
         return "fragments/layout";
     }
 
     @PostMapping(value = "/register")
-    public String add(UserDto newUser, Model model) {
+    public String add(UserDto newUser, Model model,
+                      MultipartHttpServletRequest multipart,
+                      HttpServletRequest request) throws IOException {
         // TODO index ni o'rniga redirect ishlatish kerak.
-        model.addAttribute("fullName", newUser.getFullName());
-        model.addAttribute(userService.addUser(newUser, model) ? "index" : "register_form");
-        model.addAttribute("content", "register");
+        model.addAttribute("display", "none");
+        model.addAttribute("content", userService.addUser(newUser, model, multipart, request) ? "index" : "register_form");
         return "fragments/layout";
     }
 
     @GetMapping(value = "/login")
-    public String log_form(Model model) {
+    public String log_form(HttpServletRequest request, Model model) {
+        userService.isLoginned(request, model);
         model.addAttribute("message", "");
         model.addAttribute("content", "login_form");
         return "fragments/layout";
@@ -57,8 +62,12 @@ public class UserController {
     @PostMapping(value = "/login")
     public String login(@ModelAttribute(name = "userName") String userName
             , @ModelAttribute(name = "password") String password,
-                        Model model, HttpServletRequest request) {
+                        Model model,
+                        HttpServletRequest request
+    ) {
+
         boolean passed = userService.loginService(userName, password, model, request);
+        userService.isLoginned(request, model);
         if (passed) {
             model.addAttribute("content", "index");
             return "fragments/layout";

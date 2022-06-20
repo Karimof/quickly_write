@@ -1,12 +1,14 @@
-<div th:fragment="content" align="center">
-    <h1>Yangi guruh yarating yoki qo'shiling</h1>
-
-    <div style=" width: 500px">
-        <p th:text="${message}"></p>
-        <form action="/guruhWindow" method="get">
-            <input class="form-control" name="name" placeholder="Guruh nomi" type="text"><br>
-            <input class="form-control" name="password" placeholder="Guruh paroli" type="text"><br>
-            <button type="submit" class="btn btn-info">Saqlash</button>
-        </form>
+<div th:fragment="content">
+    <div align="center">
+        <h1>Yangi guruh yarating yoki qo'shiling</h1>
+        <div style=" width: 500px">
+            <p th:text="${message}"></p>
+            <form action="/guruhWindow" method="get">
+                <input class="form-control" name="name" placeholder="Guruh nomi" type="text"><br>
+                <input class="form-control" name="password" placeholder="Guruh paroli" type="text"><br>
+                <button type="submit" class="btn btn-info">Saqlash</button>
+            </form>
+        </div>
     </div>
+
 </div>

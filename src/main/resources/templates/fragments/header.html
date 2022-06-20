@@ -1,44 +1,99 @@
-﻿<div th:fragment="header" class="row" style="background:grey">
-    <div class="col-2">
-        <a href="/">
-            <button class="btn btn-outline-light" style="font-size: 20pt">
+﻿<div th:fragment="header" class="row" style="background:rgba(159, 167, 160, 1); margin: 0;">
+    <ul>
+        <li>
+            <a class="active" href="/">
                 Tezyozish.uz
-            </button>
-        </a>
-    </div>
-    <div class="col-4">
-        <div class="row">
-            <div class="col-4">
-                <a href="sinov">
-                    <button class="btn btn-info">Sinov rejimi</button>
-                </a>
-            </div>
-            <div class="col-4">
-                <a href="guruh">
-                    <button class="btn btn-info">Guruh rejimi</button>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-2">
+            </a>
+        </li>
+        <li>
+            <a href="sinov">
+                Sinov rejimi
+            </a>
+        </li>
+        <li>
+            <a href="guruh">
+                Guruh rejimi
+            </a>
+        </li>
+        <li>
+            <a href="register_form" th:style="'display:' + ${displayButton}">
+                Ro'yhatdan o'tish
+            </a>
+        </li>
+        <li>
+            <a href="/login" th:style="'display:' + ${displayButton}">
+                Kirish
+            </a>
+        </li>
+        <li style="float: right">
+            <a href="profile" th:style="'display:' + ${display}">
+                <span th:text="${userName}"></span></a>
+            <!--            <div class="dropdown" th:style="'display:' + ${display}" style="float: right">-->
+            <!--                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+            <!--                   data-bs-toggle="dropdown" aria-expanded="false">-->
+            <!--                    <span th:text="${userName}"></span>-->
+            <!--                </a>-->
+            <!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+            <!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
+            <!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            <!--                </ul>-->
+            <!--            </div>-->
+        </li>
+    </ul>
 
-    </div>
-    <div class="col-1">
-        <a href="profil"
-           th:style="'visibility:' + ${visibility}">
-            <button class="btn btn-dark" th:text="${userName}"></button>
-        </a>
-    </div>
-    <div class="col-2">
-        <a href="register_form">
-            <button class="btn btn-info">Ro'yhatdan o'tish</button>
-        </a>
-    </div>
-    <div class="col-1">
-        <a href="/login">
-            <button class="btn btn-info">Kirish</button>
-        </a>
-    </div>
+
+    <!--    -->
+    <!--    <div class="col-2">-->
+    <!--        <a href="/">-->
+    <!--            <button class="btn btn-outline-light" style="font-size: 20pt">-->
+    <!--                Tezyozish.uz-->
+    <!--            </button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+    <!--    <div class="col-4">-->
+    <!--        <div class="row">-->
+    <!--            <div class="col-4">-->
+    <!--                <a href="sinov">-->
+    <!--                    <button class="btn btn-info">Sinov rejimi</button>-->
+    <!--                </a>-->
+    <!--            </div>-->
+    <!--            <div class="col-4">-->
+    <!--                <a href="guruh">-->
+    <!--                    <button class="btn btn-info">Guruh rejimi</button>-->
+    <!--                </a>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="col-2">-->
+
+    <!--    </div>-->
+    <!--    <div class="col-2">-->
+    <!--        <a href="register_form"-->
+    <!--           th:style="'display:' + ${displayButton}">-->
+    <!--            <button class="btn btn-info">Ro'yhatdan o'tish</button>-->
+    <!--        </a>-->
+    <!--    </div>-->
+    <!--    <div class="col-2">-->
+    <!--        <a href="/login"-->
+    <!--           th:style="'display:' + ${displayButton}">-->
+    <!--            <button class="btn btn-info">Kirish</button>-->
+    <!--        </a>-->
+
+    <!--        <div class="dropdown" th:style="'display:' + ${display}">-->
+    <!--            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+    <!--               data-bs-toggle="dropdown" aria-expanded="false">-->
+    <!--                <button class="btn btn-dark" th:text="${userName}"></button>-->
+    <!--            </a>-->
+    <!--            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+    <!--                <li><a class="dropdown-item" href="#">Action</a></li>-->
+    <!--                <li><a class="dropdown-item" href="#">Another action</a></li>-->
+    <!--                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+
+
+    <!--    </div>-->
 
     <!--    <div class="col-2">-->
     <!--        <span th:text="#{lang.change}"></span>:-->

@@ -1,22 +1,69 @@
 ﻿<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="webjars/bootstrap/5.1.3/css/bootstrap.css" rel="stylesheet">
+    <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/components/dropdowns/">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!--THIS for sinov.html-->
     <script src="../../static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>
+    <script href="webjars/jquery/3.6.0/jquery.min.js" rel="stylesheet"></script>
+    <script href="webjars/popper.js/2.9.3/umd/popper.min.js" rel="stylesheet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
     <style>
         #typingPlace:focus {
             outline: none;
+        }
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgba(193, 195, 196, 0.22)
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: rgba(159, 167, 160, 1);
+        }
+    </style>
+    <!--Values and orgText styles-->
+    <style>
+        #values, #orgText {
+            font-size: 20pt;
+            -webkit-user-select: all;
+            user-select: none;
+            font-family: Quicksand;
+            position: absolute;
+            margin: 0 100px 0 100px;
         }
     </style>
 </head>
 <body>
 
 <div th:replace="fragments/header.html::header">This is header.html content</div>
-<div th:replace="${content + '.html'}::content">This is index.html content</div>
+<div th:include="${content + '.html'}::content" id="content">This is index.html content</div>
 <div th:replace="fragments/footer.html::footer">This is footer.html content</div>
 
+<script>
+    let content = document.getElementById("content");
+    content.style.height = window.screen.height * 0.75 + "px";
+    console.log(content.style);
+</script>
 </body>
 </html>
