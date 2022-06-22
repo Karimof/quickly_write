@@ -1,4 +1,4 @@
-package uz.quickly_write_html.model;
+package uz.quicklyWriteHtml.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

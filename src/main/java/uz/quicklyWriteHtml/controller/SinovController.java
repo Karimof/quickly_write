@@ -1,15 +1,15 @@
-package uz.quickly_write_html.controller;
+package uz.quicklyWriteHtml.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import uz.quickly_write_html.entitiy.Group;
-import uz.quickly_write_html.entitiy.User;
-import uz.quickly_write_html.repository.UserRepo;
-import uz.quickly_write_html.service.GroupService;
-import uz.quickly_write_html.service.SinovService;
-import uz.quickly_write_html.service.UserService;
+import uz.quicklyWriteHtml.entitiy.Group;
+import uz.quicklyWriteHtml.entitiy.User;
+import uz.quicklyWriteHtml.repository.UserRepo;
+import uz.quicklyWriteHtml.service.GroupService;
+import uz.quicklyWriteHtml.service.SinovService;
+import uz.quicklyWriteHtml.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

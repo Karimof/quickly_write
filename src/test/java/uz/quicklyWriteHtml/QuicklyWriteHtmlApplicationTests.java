@@ -1,4 +1,4 @@
-package uz.quickly_write_html;
+package uz.quicklyWriteHtml;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package uz.quickly_write_html.entitiy;
+package uz.quicklyWriteHtml.entitiy;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

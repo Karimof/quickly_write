@@ -1,7 +1,7 @@
-package uz.quickly_write_html.repository;
+package uz.quicklyWriteHtml.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.quickly_write_html.entitiy.User;
+import uz.quicklyWriteHtml.entitiy.User;
 
 import java.util.List;
 import java.util.Optional;

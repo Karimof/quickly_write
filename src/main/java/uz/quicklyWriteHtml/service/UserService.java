@@ -1,13 +1,13 @@
-package uz.quickly_write_html.service;
+package uz.quicklyWriteHtml.service;
 
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import uz.quickly_write_html.entitiy.User;
-import uz.quickly_write_html.model.UserDto;
-import uz.quickly_write_html.repository.GroupRepo;
-import uz.quickly_write_html.repository.TextRepo;
-import uz.quickly_write_html.repository.UserRepo;
+import uz.quicklyWriteHtml.entitiy.User;
+import uz.quicklyWriteHtml.model.UserDto;
+import uz.quicklyWriteHtml.repository.GroupRepo;
+import uz.quicklyWriteHtml.repository.TextRepo;
+import uz.quicklyWriteHtml.repository.UserRepo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

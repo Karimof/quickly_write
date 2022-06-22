@@ -1,15 +1,12 @@
-package uz.quickly_write_html.controller;
+package uz.quicklyWriteHtml.controller;
 
-import javassist.NotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
-import uz.quickly_write_html.model.UserDto;
-import uz.quickly_write_html.service.GroupService;
-import uz.quickly_write_html.service.UserService;
+import uz.quicklyWriteHtml.model.UserDto;
+import uz.quicklyWriteHtml.service.GroupService;
+import uz.quicklyWriteHtml.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

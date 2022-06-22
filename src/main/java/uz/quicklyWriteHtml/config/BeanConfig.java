@@ -1,13 +1,13 @@
-package uz.quickly_write_html.config;
+package uz.quicklyWriteHtml.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import uz.quickly_write_html.repository.GroupRepo;
-import uz.quickly_write_html.repository.TextRepo;
-import uz.quickly_write_html.repository.UserRepo;
-import uz.quickly_write_html.service.GroupService;
-import uz.quickly_write_html.service.UserService;
+import uz.quicklyWriteHtml.repository.GroupRepo;
+import uz.quicklyWriteHtml.repository.TextRepo;
+import uz.quicklyWriteHtml.repository.UserRepo;
+import uz.quicklyWriteHtml.service.GroupService;
+import uz.quicklyWriteHtml.service.UserService;
 
 
 @Configuration

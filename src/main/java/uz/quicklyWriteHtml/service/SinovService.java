@@ -1,9 +1,9 @@
-package uz.quickly_write_html.service;
+package uz.quicklyWriteHtml.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.quickly_write_html.entitiy.Text;
-import uz.quickly_write_html.repository.TextRepo;
+import uz.quicklyWriteHtml.entitiy.Text;
+import uz.quicklyWriteHtml.repository.TextRepo;
 
 import java.util.Optional;
 
