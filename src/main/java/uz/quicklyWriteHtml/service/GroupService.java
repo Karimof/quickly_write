@@ -39,7 +39,7 @@ public class GroupService {
                 Group findByNameGroup = optionalGroup.get();
                 if (findByNameGroup.getPassword().equals(group.getPassword())) {
                     User user = (User) request.getSession().getAttribute("user");
-                    user.setGroup(findByNameGroup);
+                    user.setGroups(findByNameGroup);
                     repoUser.save(user);
                     b = true;
                 }
@@ -47,14 +47,14 @@ public class GroupService {
             if (!repoGroup.existsByName(group.getName())) {
                 Group savedGroup = repoGroup.save(group);
                 User user = (User) request.getSession().getAttribute("user");
-                user.setGroup(savedGroup);
+                user.setGroups(savedGroup);
                 repoUser.save(user);
                 b = true;
             }
         }
         if (b) {
             List<String> userNames = new ArrayList<>();
-            List<User> allUserByGroupName = repoUser.findAllByGroup_Name(group.getName());
+            List<User> allUserByGroupName = repoUser.findAllByGroups_Name(group.getName());
             for (User user : allUserByGroupName) {
                 userNames.add(user.getUserName());
             }
@@ -66,7 +66,7 @@ public class GroupService {
 
     public void deleteGroup(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
-        user.setGroup(null);
+        user.setGroups(null);
         repoUser.save(user);
     }
 }

@@ -13,6 +13,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     Optional<User> findByUserName(String userName);
 
 
-    List<User> findAllByGroup_Name(String groupName);
+    List<User> findAllByGroups_Name(String groupName);
 
 }

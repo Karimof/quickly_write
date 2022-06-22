@@ -31,7 +31,7 @@ public class User {
     private String photoName;
 
     @ManyToOne
-    private Group group;
+    private Group groups;
 
     public User(String fullName, String userName, String email, String password) {
         this.fullName = fullName;
