@@ -2,6 +2,7 @@ package uz.quicklyWriteHtml.controller;
 
 import java.lang.Exception;
 
+
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,6 @@ import uz.quicklyWriteHtml.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class UserController {
@@ -29,7 +28,6 @@ public class UserController {
         this.userService = userService;
         this.groupService = groupService;
     }
-
 
     @GetMapping({"", "/", "/index"})
     public String index(HttpServletRequest request, Model model) {
@@ -91,7 +89,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ModelAndView modelAndView(Exception exception) {
+    public ModelAndView handleNotFound(Exception exception) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("404error");
         return modelAndView;
