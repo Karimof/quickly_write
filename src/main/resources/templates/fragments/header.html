@@ -15,18 +15,20 @@
                 Guruh rejimi
             </a>
         </li>
-        <li>
+        <li style="float: right">
             <a href="register_form" th:style="'display:' + ${displayButton}">
                 Ro'yhatdan o'tish
             </a>
         </li>
-        <li>
+        <li style="float: right">
             <a href="/login" th:style="'display:' + ${displayButton}">
                 Kirish
             </a>
         </li>
         <li style="float: right">
-            <a href="profile" th:style="'display:' + ${display}">
+            <a href="logout" th:style="'display:' + ${display}">
+                //TODO HERE
+                <img src="/uploads/photos/7ba82b6f-d1ee-4cd4-a539-4daaf02c873b.jpg">
                 <span th:text="${userName}"></span></a>
             <!--            <div class="dropdown" th:style="'display:' + ${display}" style="float: right">-->
             <!--                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->

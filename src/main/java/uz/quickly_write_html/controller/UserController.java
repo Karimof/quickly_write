@@ -1,11 +1,12 @@
 package uz.quickly_write_html.controller;
 
+import javassist.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import uz.quickly_write_html.model.UserDto;
 import uz.quickly_write_html.service.GroupService;
 import uz.quickly_write_html.service.UserService;
@@ -74,6 +75,13 @@ public class UserController {
         } else
             model.addAttribute("message", "Login yoki parol hato!");
         model.addAttribute("content", "login_form");
+        return "fragments/layout";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, Model model) {
+        request.getSession().setAttribute("user", null);
+        model.addAttribute("content", "index");
         return "fragments/layout";
     }
 }

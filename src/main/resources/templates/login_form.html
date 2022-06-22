@@ -1,13 +1,15 @@
-<div th:fragment="content" align="center">
-    <div style="margin-top: 10%; width: 300px">
-        <form action="/login" method="post" enctype="multipart/form-data">
-            <h3 th:text="#{userlogin}"></h3>
-            <h5 align="center" style="color: red" th:text="${message}"></h5>
+<div th:fragment="content">
+    <div align="center">
+        <div style="margin-top: 10%; width: 300px">
+            <form action="/login" method="post" enctype="multipart/form-data">
+                <h3 th:text="#{userlogin}"></h3>
+                <h5 align="center" style="color: red" th:text="${message}"></h5>
 
-            <input class="form-control" name="userName" placeholder="Enter your userName" type="text"><br>
-            <input class="form-control" name="password" placeholder="Enter Password" type="text"><br>
+                <input class="form-control" name="userName" placeholder="Enter your userName" type="text"><br>
+                <input class="form-control" name="password" placeholder="Enter Password" type="text"><br>
 
-            <button class="btn btn-success" type="submit">Enter</button>
-        </form>
+                <button class="btn btn-success" type="submit">Enter</button>
+            </form>
+        </div>
     </div>
 </div>

@@ -21,7 +21,6 @@ import java.util.UUID;
 
 
 public class UserService {
-    private static final String uploadDir = "yuklanganlar";
     final
     UserRepo userRepo;
     final
@@ -52,13 +51,15 @@ public class UserService {
             Iterator<String> fileNames = multipart.getFileNames();
             MultipartFile file = multipart.getFile(fileNames.next());
             User user = new User();
-            if (file != null) {
+            if (!file.isEmpty()) {
                 String fullOrgName = file.getOriginalFilename();
 
+                // Hashing the photo name
                 String[] split = fullOrgName.split("\\.");
                 String hashName = UUID.randomUUID().toString() + "." + split[split.length - 1];
                 user.setPhotoName(hashName);
 
+                // Saving photo to file system
                 Path path = Paths.get("uploads/photos/" + hashName);
                 InputStream inputStream = file.getInputStream();
                 Files.copy(inputStream, path);
@@ -101,6 +102,7 @@ public class UserService {
         if (user != null) {
             groupService.deleteGroup(request);
             model.addAttribute("userName", user.getUserName());
+            model.addAttribute("userPhoto", "/uploads/photos/" + user.getPhotoName());
             model.addAttribute("display", "");
             model.addAttribute("displayButton", "none");
 
