@@ -1,15 +1,22 @@
 package uz.quicklyWriteHtml.controller;
 
+import java.lang.Exception;
+
+import javassist.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import uz.quicklyWriteHtml.model.UserDto;
 import uz.quicklyWriteHtml.service.GroupService;
 import uz.quicklyWriteHtml.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -80,5 +87,13 @@ public class UserController {
         request.getSession().setAttribute("user", null);
         model.addAttribute("content", "index");
         return "fragments/layout";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView modelAndView(Exception exception) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        return modelAndView;
     }
 }
