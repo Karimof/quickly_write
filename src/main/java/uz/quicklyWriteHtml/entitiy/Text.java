@@ -1,7 +1,14 @@
 package uz.quicklyWriteHtml.entitiy;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "texts")
 public class Text {
     @Id
@@ -12,25 +19,6 @@ public class Text {
     private String text;
 
     public Text(String text) {
-        this.text = text;
-    }
-
-    public Text() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
         this.text = text;
     }
 }

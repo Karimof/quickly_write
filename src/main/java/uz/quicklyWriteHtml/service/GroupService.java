@@ -33,7 +33,7 @@ public class GroupService {
         if (!group.getName().equals("")) {
             group.setName(group.getName().toLowerCase());
 
-            Optional<Group> optionalGroup = repoGroup.findByName(group.getName());
+            Optional<Group> optionalGroup = repoGroup.findFirstByName(group.getName().trim());
 
             if (optionalGroup.isPresent()) {
                 Group findByNameGroup = optionalGroup.get();

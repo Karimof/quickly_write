@@ -100,7 +100,6 @@ public class UserService {
     public Model isLoginned(HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            groupService.deleteGroup(request);
             model.addAttribute("userName", user.getUserName());
             model.addAttribute("userPhoto", "/uploads/photos/" + user.getPhotoName());
             model.addAttribute("display", "");
