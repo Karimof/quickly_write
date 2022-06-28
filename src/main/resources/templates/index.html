@@ -1,35 +1,6 @@
 <div th:fragment="content">
     <div style="background: url('/images/MK2C3Z.png') center no-repeat; background-size: contain; height: 70%">
-        <h1>CONTENT</h1>
+        <h1 th:text="#{greeting}"></h1>
         <p th:text="${message}"></p>
     </div>
 </div>
-
-
-<!--<p th:text="${message}"></p>-->
-
-<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">-->
-<!--    let selectedOption;-->
-<!--    $(document).ready(function () {-->
-<!--        $("#locales").change(function () {-->
-<!--            selectedOption = $('#locales').val();-->
-<!--            if (selectedOption !== '') {-->
-
-<!--                window.location.replace('?lang=' + selectedOption);-->
-
-<!--            }-->
-<!--        });-->
-<!--    });-->
-<!--    console.log(window.location.href);-->
-<!--    selId = document.getElementById("locales");-->
-<!--    if (window.location.href === "http://localhost:9090/?lang=uz") {-->
-<!--        selId.value = 'uz';-->
-<!--        console.log("uz tanlandi");-->
-<!--    } else {-->
-<!--        selId.value = 'ru';-->
-<!--        console.log("ru tanlandi");-->
-<!--    }-->
-<!--</script>-->
-<!--</div>-->
-<!--</html>-->
-

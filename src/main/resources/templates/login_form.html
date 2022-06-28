@@ -2,13 +2,13 @@
     <div align="center">
         <div style="margin-top: 10%; width: 300px">
             <form action="/login" method="post" enctype="multipart/form-data">
-                <h3 th:text="#{userlogin}"></h3>
+                <h3 th:text="#{logFormHeader}"></h3>
                 <h5 align="center" style="color: red" th:text="${message}"></h5>
 
-                <input class="form-control" name="userName" placeholder="Enter your userName" type="text"><br>
-                <input class="form-control" name="password" placeholder="Enter Password" type="text"><br>
+                <input th:placeholder="#{plc.inputUserName}" class="form-control" name="userName" type="text"><br>
+                <input th:placeholder="#{plc.inputUserPass}" class="form-control" name="password" type="text"><br>
 
-                <button class="btn btn-success" type="submit">Enter</button>
+                <button class="btn btn-success" type="submit" th:text="#{enter}"></button>
             </form>
         </div>
     </div>

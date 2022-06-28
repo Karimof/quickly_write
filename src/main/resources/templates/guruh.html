@@ -1,14 +1,13 @@
 <div th:fragment="content">
     <div align="center">
-        <h1>Yangi guruh yarating yoki qo'shiling</h1>
+        <h1 th:text="#{createGroupText}"></h1>
         <div style=" width: 500px">
-            <p th:text="${message}"></p>
+            <p th:if="${message != null}" th:text="#{groupPageMess}"></p>
             <form action="/guruhWindow" method="get">
-                <input class="form-control" name="name" placeholder="Guruh nomi" type="text"><br>
-                <input class="form-control" name="password" placeholder="Guruh paroli" type="text"><br>
-                <button type="submit" class="btn btn-info">Saqlash</button>
+                <input th:placeholder="#{groupName}" class="form-control" name="name" type="text"><br>
+                <input th:placeholder="#{groupPass}" class="form-control" name="password" type="text"><br>
+                <button th:text="#{submit}" type="submit" class="btn btn-info"></button>
             </form>
         </div>
     </div>
-
 </div>

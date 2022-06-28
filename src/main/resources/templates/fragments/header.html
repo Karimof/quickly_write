@@ -2,26 +2,30 @@
     <ul>
         <li>
             <a class="active" href="/">
-                Tezyozish.uz
+                <img src="/images/logo.png" width="200px">
             </a>
         </li>
         <li>
-            <a href="sinov">
-                Sinov rejimi
-            </a>
+            <a href="sinov" th:text="#{test}"></a>
         </li>
         <li>
-            <a href="guruh">
-                Guruh rejimi
+            <a href="guruh" th:text="#{testGroup}"></a>
+        </li>
+        <li style="float: right">
+            <a href="/?lang">
+                lotin
             </a>
         </li>
         <li style="float: right">
-            <a href="register_form" th:style="'display:' + ${displayButton}">
-                Ro'yhatdan o'tish
+            <a href="/?lang=kr">
+                krill
             </a>
         </li>
         <li style="float: right">
-            <a href="/login" th:style="'display:' + ${displayButton}">
+            <a href="register_form" th:style="'display:' + ${displayButton}" th:text="#{register}"></a>
+        </li>
+        <li style="float: right">
+            <a href="/login" th:style="'display:' + ${displayButton}" th:text="#{login}">
                 Kirish
             </a>
         </li>
@@ -30,73 +34,19 @@
                 //TODO HERE
                 <img src="/uploads/photos/7ba82b6f-d1ee-4cd4-a539-4daaf02c873b.jpg">
                 <span th:text="${userName}"></span></a>
-            <!--            <div class="dropdown" th:style="'display:' + ${display}" style="float: right">-->
-            <!--                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
-            <!--                   data-bs-toggle="dropdown" aria-expanded="false">-->
-            <!--                    <span th:text="${userName}"></span>-->
-            <!--                </a>-->
-            <!--                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-            <!--                    <li><a class="dropdown-item" href="#">Action</a></li>-->
-            <!--                    <li><a class="dropdown-item" href="#">Another action</a></li>-->
-            <!--                    <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-            <!--                </ul>-->
-            <!--            </div>-->
+            <!--                        <div class="dropdown" th:style="'display:' + ${display}" style="float: right">-->
+            <!--                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
+            <!--                               data-bs-toggle="dropdown" aria-expanded="false">-->
+            <!--                                <span th:text="${userName}"></span>-->
+            <!--                            </a>-->
+            <!--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+            <!--                                <li><a class="dropdown-item" href="#">Action</a></li>-->
+            <!--                                <li><a class="dropdown-item" href="#">Another action</a></li>-->
+            <!--                                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+            <!--                            </ul>-->
+            <!--                        </div>-->
         </li>
     </ul>
-
-
-    <!--    -->
-    <!--    <div class="col-2">-->
-    <!--        <a href="/">-->
-    <!--            <button class="btn btn-outline-light" style="font-size: 20pt">-->
-    <!--                Tezyozish.uz-->
-    <!--            </button>-->
-    <!--        </a>-->
-    <!--    </div>-->
-    <!--    <div class="col-4">-->
-    <!--        <div class="row">-->
-    <!--            <div class="col-4">-->
-    <!--                <a href="sinov">-->
-    <!--                    <button class="btn btn-info">Sinov rejimi</button>-->
-    <!--                </a>-->
-    <!--            </div>-->
-    <!--            <div class="col-4">-->
-    <!--                <a href="guruh">-->
-    <!--                    <button class="btn btn-info">Guruh rejimi</button>-->
-    <!--                </a>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--    <div class="col-2">-->
-
-    <!--    </div>-->
-    <!--    <div class="col-2">-->
-    <!--        <a href="register_form"-->
-    <!--           th:style="'display:' + ${displayButton}">-->
-    <!--            <button class="btn btn-info">Ro'yhatdan o'tish</button>-->
-    <!--        </a>-->
-    <!--    </div>-->
-    <!--    <div class="col-2">-->
-    <!--        <a href="/login"-->
-    <!--           th:style="'display:' + ${displayButton}">-->
-    <!--            <button class="btn btn-info">Kirish</button>-->
-    <!--        </a>-->
-
-    <!--        <div class="dropdown" th:style="'display:' + ${display}">-->
-    <!--            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
-    <!--               data-bs-toggle="dropdown" aria-expanded="false">-->
-    <!--                <button class="btn btn-dark" th:text="${userName}"></button>-->
-    <!--            </a>-->
-    <!--            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-    <!--                <li><a class="dropdown-item" href="#">Action</a></li>-->
-    <!--                <li><a class="dropdown-item" href="#">Another action</a></li>-->
-    <!--                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-    <!--            </ul>-->
-    <!--        </div>-->
-
-
-    <!--    </div>-->
-
     <!--    <div class="col-2">-->
     <!--        <span th:text="#{lang.change}"></span>:-->
     <!--        <select class="form-check-label" id="locales">-->
@@ -104,4 +54,26 @@
     <!--            <option th:label="#{lang.uz}" value="uz"></option>-->
     <!--        </select>-->
     <!--    </div>-->
+    <!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">-->
+    <!--        let selectedOption;-->
+    <!--        console.log("js ishladi");-->
+    <!--        $(document).ready(function () {-->
+    <!--            $("#locales").change(function () {-->
+    <!--                selectedOption = $('#locales').val();-->
+    <!--                if (selectedOption !== '') {-->
+    <!--                    console.log("if ishladi");-->
+    <!--                    window.location.replace('?lang=' + selectedOption);-->
+    <!--                }-->
+    <!--            });-->
+    <!--        });-->
+    <!--        // console.log(window.location.href);-->
+    <!--        selId = document.getElementById("locales");-->
+    <!--        if (window.location.href === "http://localhost:9090/?lang=uz") {-->
+    <!--            // selId.value = 'uz';-->
+    <!--            console.log("uz tanlandi");-->
+    <!--        } else {-->
+    <!--            // selId.value = 'ru';-->
+    <!--            console.log("ru tanlandi");-->
+    <!--        }-->
+    <!--    </script>-->
 </div>

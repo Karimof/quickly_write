@@ -1,12 +1,12 @@
 <div th:fragment="content" style="min-height: 600px; background-color: white">
 
-    <h3 style="position: absolute;left: 200px">
-        Guruh nomi: <span th:text="${gName}"></span><br>
-        Parol: <span th:text="${gPass}"></span>
-    </h3>
-    siz : <span th:text="${currentUser.getUserName}"></span>
+    <h5 style="position: absolute;left: 300px">
+        <span th:text="#{groupName}"></span> : <span th:text="${gName}"></span><br>
+        <span th:text="#{groupPass}"></span> : <span th:text="${gPass}"></span>
+    </h5>
+    <!--    siz : <span th:text="${currentUser.getUserName}"></span>-->
     <br>
-    your friends :
+    <span th:text="#{groupMembers}"></span> :
     <tr th:each="one: ${userNames}">
         <td th:text="${one}"></td>
     </tr>
@@ -15,7 +15,6 @@
             style=" text-align:center; width: 500px; margin-left: 420px; border-radius: 30px    ">
         <p id="result"
            style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
-
         </p>
     </div>
     <!--TIMER-->
