@@ -97,19 +97,22 @@ public class UserService {
         return true;
     }
 
-    public Model isLoginned(HttpServletRequest request, Model model) {
+    public Model isLogged(HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getUserName());
             model.addAttribute("userPhoto", "/uploads/photos/" + user.getPhotoName());
             model.addAttribute("display", "");
             model.addAttribute("displayButton", "none");
-
         } else {
             model.addAttribute("display", "none");
             model.addAttribute("displayButton", "");
             model.addAttribute("userName", "");
         }
         return model;
+    }
+
+    public boolean isLogged(HttpServletRequest request) {
+        return request.getSession().getAttribute("user") != null;
     }
 }

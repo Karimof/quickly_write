@@ -31,14 +31,14 @@ public class UserController {
 
     @GetMapping({"", "/", "/index"})
     public String index(HttpServletRequest request, Model model) {
-        userService.isLoginned(request, model);
+        userService.isLogged(request, model);
         model.addAttribute("content", "index");
         return "fragments/layout";
     }
 
     @GetMapping("/register_form")
     public String regForm(HttpServletRequest request, Model model) {
-        userService.isLoginned(request, model);
+        userService.isLogged(request, model);
         model.addAttribute("message", "");
         model.addAttribute("content", "register_form");
         return "fragments/layout";
@@ -56,7 +56,7 @@ public class UserController {
 
     @GetMapping(value = "/login")
     public String log_form(HttpServletRequest request, Model model) {
-        userService.isLoginned(request, model);
+        userService.isLogged(request, model);
         model.addAttribute("message", "");
         model.addAttribute("content", "login_form");
         return "fragments/layout";
@@ -70,7 +70,7 @@ public class UserController {
     ) {
 
         boolean passed = userService.loginService(userName, password, model, request);
-        userService.isLoginned(request, model);
+        userService.isLogged(request, model);
         if (passed) {
             model.addAttribute("content", "index");
             return "fragments/layout";

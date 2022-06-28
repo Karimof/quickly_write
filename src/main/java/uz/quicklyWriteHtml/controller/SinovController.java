@@ -33,31 +33,25 @@ public class SinovController {
         this.userService = userService;
     }
 
+    //TODO combining /sinov and /guruh content's
     @GetMapping("/sinov")
     public String sinov(Model model, HttpServletRequest request) {
-        groupService.deleteGroup(request);
-        userService.isLoginned(request, model);
-        model.addAttribute("text", sinovService.findByRandomId().getText());
-        User user = (User) request.getSession().getAttribute("user");
-        model.addAttribute("userName", ((User) request.getSession().getAttribute("user")).getUserName());
-        model.addAttribute("content", "sinov");
+        userService.isLogged(request, model);
+        forTests("sinov", request, model);
         return "fragments/layout";
     }
 
     @GetMapping("/guruh")
     public String guruhUrl(HttpServletRequest request, Model model) {
-        groupService.deleteGroup(request);
-        userService.isLoginned(request, model);
-        User user = (User) request.getSession().getAttribute("user");
-        model.addAttribute("userName", user.getUserName());
-        model.addAttribute("content", "guruh");
+        userService.isLogged(request, model);
+        forTests("guruh", request, model);
         return "fragments/layout";
     }
 
     @GetMapping("/guruhWindow")
     public String guruh(Group group, HttpServletRequest request, Model model) {
         List<String> userNames = groupService.addToGroup(group, request);
-        userService.isLoginned(request, model);
+        userService.isLogged(request, model);
         if (userNames != null) {
             User currentUser = (User) request.getSession().getAttribute("user");
             model.addAttribute("gName", group.getName());
@@ -66,11 +60,25 @@ public class SinovController {
             model.addAttribute("currentUser", currentUser);
             model.addAttribute("text", sinovService.findByRandomId().getText());
             model.addAttribute("content", "guruhmusoboqasi");
-            return "fragments/layout";
         } else {
             model.addAttribute("message", "Bunday nomli guruh mavjud. Yoki parol hato!");
             model.addAttribute("content", "guruh");
-            return "fragments/layout";
         }
+        return "fragments/layout";
+    }
+
+    private Model forTests(String pageName, HttpServletRequest request, Model model) {
+        boolean logged = userService.isLogged(request);
+        if (logged) {
+            groupService.deleteGroup(request);
+            if (pageName.equals("sinov"))
+                model.addAttribute("text", sinovService.findByRandomId().getText());
+            model.addAttribute("userName", ((User) request.getSession().getAttribute("user")).getUserName());
+            model.addAttribute("content", pageName);
+        } else {
+            model.addAttribute("content", "login_form");
+            model.addAttribute("plcSingIng", "Iltimos avval tizimga kiring");
+        }
+        return model;
     }
 }
