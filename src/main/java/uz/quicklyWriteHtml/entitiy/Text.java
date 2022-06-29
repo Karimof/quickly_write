@@ -18,7 +18,5 @@ public class Text {
     @Column(length = 1000)
     private String text;
 
-    public Text(String text) {
-        this.text = text;
-    }
+
 }

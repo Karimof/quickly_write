@@ -33,7 +33,6 @@ public class SinovController {
         this.userService = userService;
     }
 
-    //TODO combining /sinov and /guruh content's
     @GetMapping("/sinov")
     public String sinov(Model model, HttpServletRequest request) {
         userService.isLogged(request, model);
