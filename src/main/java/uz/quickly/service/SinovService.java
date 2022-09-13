@@ -1,16 +1,18 @@
-package uz.quicklyWriteHtml.service;
+package uz.quickly.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.quicklyWriteHtml.entitiy.Text;
-import uz.quicklyWriteHtml.repository.TextRepo;
+import uz.quickly.entitiy.Text;
+import uz.quickly.repository.TextRepo;
 
 import java.util.Optional;
 
 @Service
 public class SinovService {
-    @Autowired
-    TextRepo repoText;
+    final TextRepo repoText;
+
+    public SinovService(TextRepo repoText) {
+        this.repoText = repoText;
+    }
 
     public Text findByRandomId() {
         Integer countOfRows = repoText.countOfTexts();

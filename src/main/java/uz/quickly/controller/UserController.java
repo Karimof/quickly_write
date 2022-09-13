@@ -1,4 +1,4 @@
-package uz.quicklyWriteHtml.controller;
+package uz.quickly.controller;
 
 import java.lang.Exception;
 
@@ -10,12 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import uz.quicklyWriteHtml.model.UserDto;
-import uz.quicklyWriteHtml.service.GroupService;
-import uz.quicklyWriteHtml.service.UserService;
+import uz.quickly.entitiy.User;
+import uz.quickly.model.EditUserDTO;
+import uz.quickly.model.UserDto;
+import uz.quickly.service.GroupService;
+import uz.quickly.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -24,7 +28,8 @@ public class UserController {
     final
     GroupService groupService;
 
-    public UserController(UserService userService, GroupService groupService) {
+    public UserController(UserService userService,
+                          GroupService groupService) {
         this.userService = userService;
         this.groupService = groupService;
     }
@@ -93,5 +98,31 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("404error");
         return modelAndView;
+    }
+
+    // BEGINNING FROM HERE ADMIN METHODS, SURE TEMPORARY ;-)
+
+    @GetMapping("admin/index")
+    public String index(Model model) {
+        List<User> userList = userService.getUserList();
+        model.addAttribute("userList", userList);
+        return "adminIndex";
+    }
+
+    @GetMapping("admin/get/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<User> optionalUser = userService.getUser(id);
+        if (optionalUser.isEmpty()) {
+            return "adminIndex";
+        }
+        User user = optionalUser.get();
+        model.addAttribute("user", user);
+        return "adminEditUser";
+    }
+
+    @PostMapping("admin/update/{id}")
+    public String update(EditUserDTO editUserDto, @PathVariable Integer id, Model model, MultipartHttpServletRequest multipart) throws IOException {
+        userService.updateUser(editUserDto, id, model, multipart);
+        return "adminEditUser";
     }
 }

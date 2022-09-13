@@ -1,15 +1,15 @@
-package uz.quicklyWriteHtml.controller;
+package uz.quickly.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import uz.quicklyWriteHtml.entitiy.Group;
-import uz.quicklyWriteHtml.entitiy.User;
-import uz.quicklyWriteHtml.repository.UserRepo;
-import uz.quicklyWriteHtml.service.GroupService;
-import uz.quicklyWriteHtml.service.SinovService;
-import uz.quicklyWriteHtml.service.UserService;
+import uz.quickly.entitiy.Group;
+import uz.quickly.entitiy.User;
+import uz.quickly.repository.UserRepo;
+import uz.quickly.service.GroupService;
+import uz.quickly.service.SinovService;
+import uz.quickly.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -27,7 +27,9 @@ public class SinovController {
     @Autowired //TODO Remove here the userRepo
     UserRepo repoUser;
 
-    public SinovController(SinovService sinovService, GroupService groupService, UserService userService) {
+    public SinovController(SinovService sinovService,
+                           GroupService groupService,
+                           UserService userService) {
         this.sinovService = sinovService;
         this.groupService = groupService;
         this.userService = userService;

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.0/components/dropdowns/" rel="canonical">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script href="webjars/jquery/3.6.0/jquery.min.js" rel="stylesheet"></script>
+    <script href="webjars/popper.js/2.9.3/umd/popper.min.js" rel="stylesheet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body class="container">
+
+<!--<img th:src="'/photos/'${user.photoName}">-->
+<form th:action="'/admin/updateUser/' + ${user.id}" method="post" enctype="multipart/form-data"
+      class="form-text container">
+    <div class="row">
+        <div class="col-4">
+            <img th:src="@{'/photos/'+${user.photoName}}" width="80%" style="border-radius: 50px"><br>
+            Suratni o'rgartirish
+            <input type="file" accept="image/*" name="image">
+        </div>
+        <div class="col-4">
+            <div align="center" style="width: 100%">
+                <input type="text" class="form-control" name="fullName" th:value="${user.fullName}" placeholder="F.I.O"><br>
+                <input type="text" class="form-control" name="userName" th:value="${user.userName}" placeholder="login"><br>
+                <input type="email" class="form-control" th:value="${user.email}" readonly="readonly"><br>
+                <input type="text" class="form-control" name="password" th:value="${user.password}" placeholder="parol"><br>
+                <button class="btn btn-primary" th:text="#{submit}"></button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

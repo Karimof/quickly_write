@@ -1,11 +1,11 @@
-package uz.quicklyWriteHtml.service;
+package uz.quickly.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.quicklyWriteHtml.entitiy.Group;
-import uz.quicklyWriteHtml.entitiy.User;
-import uz.quicklyWriteHtml.repository.GroupRepo;
-import uz.quicklyWriteHtml.repository.UserRepo;
+import uz.quickly.entitiy.Group;
+import uz.quickly.entitiy.User;
+import uz.quickly.repository.GroupRepo;
+import uz.quickly.repository.UserRepo;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -22,7 +22,8 @@ public class GroupService {
     UserRepo repoUser;
 
     @Autowired
-    public GroupService(GroupRepo repoGroup, UserRepo repoUser) {
+    public GroupService(GroupRepo repoGroup,
+                        UserRepo repoUser) {
         this.repoGroup = repoGroup;
         this.repoUser = repoUser;
     }

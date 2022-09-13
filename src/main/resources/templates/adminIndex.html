@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.0/components/dropdowns/" rel="canonical">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script href="webjars/jquery/3.6.0/jquery.min.js" rel="stylesheet"></script>
+    <script href="webjars/popper.js/2.9.3/umd/popper.min.js" rel="stylesheet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="container">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User name</th>
+        <th>email</th>
+        <th>password</th>
+    </tr>
+    </thead>
+    <tbody th:each="user: ${userList}">
+    <tr>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.password}"></td>
+        <td><a th:href="${'get/'+user.id}">edit</a></td>
+    </tr>
+    </tbody>
+</table>
+<!--<tr th:each="user: ${userList}">-->
+<!--    <td th:text="${user.userName}"></td>-->
+<!--    <br>-->
+<!--</tr>-->
+</body>
+</html>

@@ -1,4 +1,4 @@
-package uz.quicklyWriteHtml;
+package uz.quickly;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

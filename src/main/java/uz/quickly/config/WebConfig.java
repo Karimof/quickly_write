@@ -1,4 +1,4 @@
-package uz.quicklyWriteHtml.config;
+package uz.quickly.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
