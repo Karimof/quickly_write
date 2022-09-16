@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import uz.quickly.entitiy.User;
+import uz.quickly.domain.User;
 import uz.quickly.model.EditUserDTO;
 import uz.quickly.model.UserDto;
 import uz.quickly.service.GroupService;

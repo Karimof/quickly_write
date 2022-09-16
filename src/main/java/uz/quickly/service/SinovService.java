@@ -1,7 +1,7 @@
 package uz.quickly.service;
 
 import org.springframework.stereotype.Service;
-import uz.quickly.entitiy.Text;
+import uz.quickly.domain.Text;
 import uz.quickly.repository.TextRepo;
 
 import java.util.Optional;

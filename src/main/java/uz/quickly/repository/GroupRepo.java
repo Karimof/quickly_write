@@ -1,7 +1,7 @@
 package uz.quickly.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.quickly.entitiy.Group;
+import uz.quickly.domain.Group;
 
 import java.util.Optional;
 

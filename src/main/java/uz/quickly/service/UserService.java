@@ -1,9 +1,13 @@
 package uz.quickly.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import uz.quickly.entitiy.User;
+import uz.quickly.domain.Role;
+import uz.quickly.domain.User;
+import uz.quickly.domain.enumeration.RoleEnum;
 import uz.quickly.model.EditUserDTO;
 import uz.quickly.model.UserDto;
 import uz.quickly.repository.GroupRepo;
@@ -16,33 +20,36 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
-
+@Service
 public class UserService {
-    final
-    UserRepo userRepo;
-    final
-    GroupRepo groupRepo;
-    final
-    TextRepo textRepo;
-    final
-    GroupService groupService;
+
+    private final UserRepo userRepo;
+
+    private final GroupRepo groupRepo;
+
+    private final TextRepo textRepo;
+
+    private final GroupService groupService;
+
+    private final RoleService roleService;
+
 
     public UserService(UserRepo userRepo,
                        GroupRepo groupRepo,
                        TextRepo textRepo,
-                       GroupService groupService) {
+                       GroupService groupService,
+                       RoleService roleService) {
         this.userRepo = userRepo;
         this.groupRepo = groupRepo;
         this.textRepo = textRepo;
         this.groupService = groupService;
+        this.roleService = roleService;
     }
 
-    public boolean addUser(UserDto newUser, Model model,
+    public boolean addUser(UserDto newUser,
+                           Model model,
                            MultipartHttpServletRequest multipart,
                            HttpServletRequest request
     ) throws IOException {
@@ -54,14 +61,17 @@ public class UserService {
         }
         if (newUser.getPassword().equals(newUser.getCheckPassword())) {
             User user = new User();
-
-            // here comes user photo
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            String encodePassword = bCryptPasswordEncoder.encode(newUser.getPassword());
+            Set<Role> roleSet = new HashSet<>();
+            Role byRolName = roleService.findByRolName(String.valueOf(RoleEnum.USER));
             user = saveImage(multipart, user);
-
             user.setFullName(newUser.getFullName());
             user.setUserName(newUser.getUserName());
             user.setEmail(newUser.getEmail());
-            user.setPassword(newUser.getPassword());
+            user.setPassword(encodePassword);
+            roleSet.add(byRolName);
+            user.setRoles(roleSet);
             userRepo.save(user);
             message = "Muvaffaqqiyatli ro'yhatdan o'tdingiz va tizimga kirdingiz. ";
             request.getSession().setAttribute("user", user);
@@ -135,7 +145,7 @@ public class UserService {
     public User saveImage(MultipartHttpServletRequest multipart, User user) throws IOException {
         Iterator<String> fileNames = multipart.getFileNames();
         MultipartFile file = multipart.getFile(fileNames.next());
-        if (!file.isEmpty()) {
+        if (file != null && !file.isEmpty()) {
             String fullOrgName = file.getOriginalFilename();
 
             // Hashing the photo name
