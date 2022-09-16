@@ -2,7 +2,7 @@ package uz.quickly.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import uz.quickly.entitiy.Text;
+import uz.quickly.domain.Text;
 
 public interface TextRepo extends JpaRepository<Text, Integer> {
 

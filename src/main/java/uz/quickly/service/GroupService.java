@@ -2,8 +2,8 @@ package uz.quickly.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uz.quickly.entitiy.Group;
-import uz.quickly.entitiy.User;
+import uz.quickly.domain.Group;
+import uz.quickly.domain.User;
 import uz.quickly.repository.GroupRepo;
 import uz.quickly.repository.UserRepo;
 

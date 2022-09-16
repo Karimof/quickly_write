@@ -1,4 +1,4 @@
-package uz.quickly.entitiy;
+package uz.quickly.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

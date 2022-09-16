@@ -1,7 +1,7 @@
 package uz.quickly.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.quickly.entitiy.User;
+import uz.quickly.domain.User;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,12 +1,10 @@
 package uz.quickly.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import uz.quickly.entitiy.Group;
-import uz.quickly.entitiy.User;
-import uz.quickly.repository.UserRepo;
+import uz.quickly.domain.Group;
+import uz.quickly.domain.User;
 import uz.quickly.service.GroupService;
 import uz.quickly.service.SinovService;
 import uz.quickly.service.UserService;
@@ -24,8 +22,6 @@ public class SinovController {
 
     final
     UserService userService;
-    @Autowired //TODO Remove here the userRepo
-    UserRepo repoUser;
 
     public SinovController(SinovService sinovService,
                            GroupService groupService,
