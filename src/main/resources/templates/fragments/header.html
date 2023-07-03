@@ -9,7 +9,7 @@
             <a href="sinov" th:text="#{test}"></a>
         </li>
         <li>
-            <a href="guruh" th:text="#{testGroup}"></a>
+            <a class="disabled" style="cursor: no-drop" href="#guruh" th:text="#{testGroup}"></a>
         </li>
         <li style="float: right">
             <a href="/?lang">
@@ -31,49 +31,14 @@
         </li>
         <li style="float: right">
             <a href="logout" th:style="'display:' + ${display}">
-                //TODO HERE
-                <img src="/uploads/photos/7ba82b6f-d1ee-4cd4-a539-4daaf02c873b.jpg">
-                <span th:text="${userName}"></span></a>
-            <!--                        <div class="dropdown" th:style="'display:' + ${display}" style="float: right">-->
-            <!--                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"-->
-            <!--                               data-bs-toggle="dropdown" aria-expanded="false">-->
-            <!--                                <span th:text="${userName}"></span>-->
-            <!--                            </a>-->
-            <!--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-            <!--                                <li><a class="dropdown-item" href="#">Action</a></li>-->
-            <!--                                <li><a class="dropdown-item" href="#">Another action</a></li>-->
-            <!--                                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-            <!--                            </ul>-->
-            <!--                        </div>-->
+                Chiqish
+                <img th:src="${userPhoto}" width="30px">
+                (<span th:text="${userName}"></span>)
+            </a>
+        </li>
+        <li style="float: right">
+            <a th:style="'display:' + ${display}"> record: <span th:text="${record}"></span> WPM</a>
         </li>
     </ul>
-    <!--    <div class="col-2">-->
-    <!--        <span th:text="#{lang.change}"></span>:-->
-    <!--        <select class="form-check-label" id="locales">-->
-    <!--            <option th:label="#{lang.ru}" value="ru"></option>-->
-    <!--            <option th:label="#{lang.uz}" value="uz"></option>-->
-    <!--        </select>-->
-    <!--    </div>-->
-    <!--    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">-->
-    <!--        let selectedOption;-->
-    <!--        console.log("js ishladi");-->
-    <!--        $(document).ready(function () {-->
-    <!--            $("#locales").change(function () {-->
-    <!--                selectedOption = $('#locales').val();-->
-    <!--                if (selectedOption !== '') {-->
-    <!--                    console.log("if ishladi");-->
-    <!--                    window.location.replace('?lang=' + selectedOption);-->
-    <!--                }-->
-    <!--            });-->
-    <!--        });-->
-    <!--        // console.log(window.location.href);-->
-    <!--        selId = document.getElementById("locales");-->
-    <!--        if (window.location.href === "http://localhost:9090/?lang=uz") {-->
-    <!--            // selId.value = 'uz';-->
-    <!--            console.log("uz tanlandi");-->
-    <!--        } else {-->
-    <!--            // selId.value = 'ru';-->
-    <!--            console.log("ru tanlandi");-->
-    <!--        }-->
-    <!--    </script>-->
 </div>
+

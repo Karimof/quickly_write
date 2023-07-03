@@ -1,18 +1,17 @@
 package uz.quickly.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import uz.quickly.domain.Role;
 import uz.quickly.domain.User;
-import uz.quickly.domain.enumeration.RoleEnum;
+import uz.quickly.domain.enumeration.ERole;
 import uz.quickly.model.EditUserDTO;
 import uz.quickly.model.UserDto;
 import uz.quickly.repository.GroupRepo;
 import uz.quickly.repository.TextRepo;
-import uz.quickly.repository.UserRepo;
+import uz.quickly.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -25,7 +24,7 @@ import java.util.*;
 @Service
 public class UserService {
 
-    private final UserRepo userRepo;
+    private final UserRepository userRepo;
 
     private final GroupRepo groupRepo;
 
@@ -36,7 +35,7 @@ public class UserService {
     private final RoleService roleService;
 
 
-    public UserService(UserRepo userRepo,
+    public UserService(UserRepository userRepo,
                        GroupRepo groupRepo,
                        TextRepo textRepo,
                        GroupService groupService,
@@ -59,17 +58,22 @@ public class UserService {
             model.addAttribute("message", message);
             return false;
         }
-        if (newUser.getPassword().equals(newUser.getCheckPassword())) {
+        if (newUser.getPassword().equals(newUser.getCheckPassword())
+                && !newUser.getUserName().isBlank()
+                && !newUser.getEmail().isBlank()
+        ) {
             User user = new User();
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            String encodePassword = bCryptPasswordEncoder.encode(newUser.getPassword());
+//            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//            String encodePassword = bCryptPasswordEncoder.encode(newUser.getPassword());
             Set<Role> roleSet = new HashSet<>();
-            Role byRolName = roleService.findByRolName(String.valueOf(RoleEnum.USER));
+            Role byRolName = roleService.findByRolName(String.valueOf(ERole.ROLE_USER));
             user = saveImage(multipart, user);
             user.setFullName(newUser.getFullName());
             user.setUserName(newUser.getUserName());
             user.setEmail(newUser.getEmail());
-            user.setPassword(encodePassword);
+//            user.setPassword(encodePassword);
+            user.setPassword(newUser.getPassword());
+            user.setRecordWpm(0L);
             roleSet.add(byRolName);
             user.setRoles(roleSet);
             userRepo.save(user);
@@ -103,8 +107,14 @@ public class UserService {
     public Model isLogged(HttpServletRequest request, Model model) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
+            Optional<User> byUserName = userRepo.findByUserName(user.getUserName());
+            if (byUserName.isPresent()) {
+                user = byUserName.get();
+                request.getSession().setAttribute("user", user);
+            }
             model.addAttribute("userName", user.getUserName());
-            model.addAttribute("userPhoto", "/uploads/photos/" + user.getPhotoName());
+            model.addAttribute("userPhoto", "/photos/" + user.getPhotoName());
+            model.addAttribute("record", user.getRecordWpm());
             model.addAttribute("display", "");
             model.addAttribute("displayButton", "none");
         } else {
@@ -160,5 +170,13 @@ public class UserService {
             user.setPhotoName(hashName);
         }
         return user;
+    }
+
+    public void setWPM(Long userId, Long WPM) {
+        User user = userRepo.findById(userId);
+        if (WPM > user.getRecordWpm()) {
+            user.setRecordWpm(WPM);
+            userRepo.save(user);
+        }
     }
 }
