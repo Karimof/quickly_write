@@ -1,103 +1,132 @@
-<div th:fragment="content" style="min-height: 500px; background-color: white">
-    <div style=" text-align:center; width: 500px; margin-left: 420px; border-radius: 30px">
-        <p id="result"
-           style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
-        </p>
-    </div>
-    <!--TIMER-->
-    <div id="container" style="position: absolute; top: 100px">
-        <div id="countdown">
-            <canvas height="150" id="countdown360_countdown" width="150">
-                <span aria-live="assertive" id="countdown-text" role="status"></span>
-            </canvas>
+<div th:fragment="content" style="min-height: 150vh; background-color: white; ">
+    <div class="row">
+        <div class="col-12">
+            <div style=" text-align:center; width: 500px; horiz-align: center; border-radius: 30px; display: contents">
+                <p id="result"
+                   style="border-radius:20px; font-family: Arial; padding-top: 10px;padding-bottom: 10px; font-size: 20pt">
+                </p>
+            </div>
         </div>
     </div>
-    <div>
-        <!--    INPUT FIELD-->
-        <div align="center">
-            <input id="typingPlace" name="typingPlace" align="center"
-                   style="width: 20%;padding: 5px; font-size: 22pt;
+    <div class="row">
+        <div class="col-md-2">
+            <!--TIMER-->
+            <img id="photo-label" width="172px" src="/images/photo-label.png"
+                 style="padding-top: 5px; padding-left: 3px">
+            <div id="countdown"></div>
+            <div>
+                <a href="sinov">
+                    <img style="margin-top: -100%; width: 100px; margin-left: 20%;" src="/images/Refresh-circle.svg">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-10" style="margin-left: 0">
+            <!--    INPUT FIELD-->
+            <div align="center">
+                <input id="typingPlace" name="typingPlace" align="center"
+                       style="width: 20%;padding: 5px; font-size: 22pt;
                 border-bottom-right-radius: 2px;
                 border-bottom-left-radius: 2px;
                 border: 3px solid transparent;
                 border-bottom-color: #12cb5b;"
-                   type="text">
-        </div>
-        <div>
-            <!--TYPED VALUES-->
-            <p id="values"
-               style="
-               color: #3fd942;
+                       type="text">
+            </div>
+            <div>
+                <!--TYPED VALUES-->
+                <p id="values"
+                   style="color: #3fd942;
                z-index: 100;
-               background-color: rgba(255,255,255,0)">
-            </p>
+               background-color: rgba(255,255,255,0);
+               margin-left: 0">
+                </p>
 
-            <!--MAIN TEXT-->
-            <p id="orgText"
-               style="
-               color: #484747;
-               font-family: Quicksand;
-               z-index: 0"
-               th:text="${text}">
-            </p>
+                <!--MAIN TEXT-->
+                <p id="orgText"
+                   style="color: #484747;
+                font-family: Quicksand;
+                z-index: 0;
+                margin-left: 0"
+                   th:text="${text}">
+                </p>
+            </div>
         </div>
-        <!--INPUT FIELD SCRIPTS-->
-        <script>
-            const input = document.getElementById("typingPlace");
-            const result = document.getElementById("result");
-            const successed = document.getElementById('values');
-            var mainText = document.getElementById("orgText");
-            var orgText = mainText.textContent.trim().split(' ');
-
-            input.focus();
-            input.addEventListener('input', updateValue);
-            let cntCorrectWords = 0;
-            let cntChanging = 0;
-
-            function updateValue(e) {
-                cntChanging++;
-                if (cntChanging === 1) {
-                    countdown.start();
-                }
-                let text = e.target.value;
-                if (orgText[0].startsWith(text.trim())) {
-                    input.style.color = 'green';
-                } else {
-                    input.style.color = 'red';
-                }
-                if (text.endsWith(' ') && text.trim() === orgText[0]) {
-                    orgText.shift()
-                    successed.textContent = successed.textContent + ' ' + text.trim();
-                    input.value = '';
-                    cntCorrectWords++;
-                    console.log(orgText);
-                }
-            }
-        </script>
-
-        <!--PROGRESS BAR SCRIPTS-->
-        <script charset="utf-8" type="text/javascript">
-            var countdown = $("#countdown").countdown360({
-
-                radius: 70,                    // radius of arc
-                strokeStyle: "#070707",          // the color of the stroke
-                strokeWidth: undefined,          // the stroke width, dynamically calulated if omitted in options
-                fillStyle: "#8ac575",            // the fill color
-                fontColor: "#477050",            // the font color
-                fontFamily: "sans-serif",        // the font family
-                fontSize: undefined,             // the font size, dynamically calulated if omitted in options
-                fontWeight: 700,                 // the font weight
-                autostart: false,                 // start the countdown automatically
-                seconds: 60,                     // the number of seconds to count down
-                label: ["second", "seconds"],    // the label to use or false if none
-                startOverAfterAdding: true,      // Start the timer over after time is added with addSeconds
-                smooth: true,                   // should the timer be smooth or stepping
-                onComplete: function () {
-                    input.setAttribute("readonly", "true");
-                    result.textContent = "Yozish tezligingiz : " + cntCorrectWords + " WPM";
-                    result.style.background = 'rgba(13,234,17,0.2)';
-                }
-            });
-        </script>
     </div>
+
+    <!--INPUT FIELD SCRIPTS-->
+    <script>
+        const input = document.getElementById("typingPlace");
+        const result = document.getElementById("result");
+        const successed = document.getElementById('values');
+        var mainText = document.getElementById("orgText");
+        var orgText = mainText.textContent.trim().split(' ');
+        let photoLabel = document.getElementById("photo-label")
+
+        input.focus();
+        input.addEventListener('input', updateValue);
+        let cntCorrectWords = 0;
+        let cntChanging = 0;
+
+        function updateValue(e) {
+            cntChanging++;
+            if (cntChanging === 1) {
+                countdown.start();
+                photoLabel.hidden = true
+            }
+            let text = e.target.value;
+            if (orgText[0].startsWith(text.trim())) {
+                input.style.color = 'green';
+            } else {
+                input.style.color = 'red';
+            }
+            if (text.endsWith(' ') && text.trim() === orgText[0]) {
+                orgText.shift()
+                successed.textContent = successed.textContent + ' ' + text.trim();
+                input.value = '';
+                cntCorrectWords++;
+            }
+        }
+    </script>
+
+    <!--PROGRESS BAR SCRIPTS-->
+    <script charset="utf-8" type="text/javascript">
+        let countdown = $("#countdown").countdown360({
+            radius: 70,                    // radius of arc
+            strokeStyle: "#78fd6f",          // the color of the stroke
+            strokeWidth: undefined,          // the stroke width, dynamically calulated if omitted in options
+            fillStyle: "#ffffff",            // the fill color
+            fontColor: "#7c7c7c",            // the font color
+            fontFamily: "sans-serif",        // the font family
+            fontSize: undefined,             // the font size, dynamically calulated if omitted in options
+            fontWeight: 700,                 // the font weight
+            autostart: false,                 // start the countdown automatically
+            seconds: 60,                     // the number of seconds to count down
+            label: ["soniya", "soniya"],    // the label to use or false if none
+            startOverAfterAdding: true,      // Start the timer over after time is added with addSeconds
+            smooth: true,                   // should the timer be smooth or stepping
+            onComplete: function () {
+                input.setAttribute("readonly", "true");
+                result.textContent = "Yozish tezligingiz : " + cntCorrectWords + " WPM";
+                result.style.background = 'rgba(13,234,17,0.2)';
+
+                const data = {userId: [[${userId}]], wpm: cntCorrectWords};
+                const option = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }
+                fetch('http://localhost:9090/setUserWpm', option)
+                    // .then((response) => response.json())
+                    // .then((data) => {
+                    //     console.log('Success:', data);
+                    // })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="../../static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>
 </div>

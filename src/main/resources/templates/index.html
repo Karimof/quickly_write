@@ -1,6 +1,19 @@
 <div th:fragment="content">
-    <div style="background: url('/images/MK2C3Z.png') center no-repeat; background-size: contain; height: 70%">
+    <div style="background: url('/images/MK2C3Z.png') center no-repeat; opacity: 0.9; background-size: contain; height: 70%">
+        <br>
         <h1 th:text="#{greeting}" align="center"></h1>
         <p th:text="${message}" align="center"></p>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <button onclick = "window.location.href='sinov'" th:text="#{indexSinov}" class="shadow-lg border border-info"
+                    style="--c:#1ac6fa; bottom: 200px; padding: 1.3rem; float: right; border-radius: 8px !important;">
+            </button>
+        </div>
+        <div class="col-6">
+            <button class="shadow-lg" th:text="#{indexGuruh}"
+                    style="--c:#50d72a; bottom: 100px; left: 500px; padding: 0.5rem;border: solid 1px  #3fd942; border-radius: 8px !important;">
+            </button>
+        </div>
     </div>
 </div>

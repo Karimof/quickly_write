@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import uz.quickly.domain.Group;
 import uz.quickly.domain.User;
 import uz.quickly.repository.GroupRepo;
-import uz.quickly.repository.UserRepo;
+import uz.quickly.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -19,11 +19,11 @@ public class GroupService {
     GroupRepo repoGroup;
 
     final
-    UserRepo repoUser;
+    UserRepository repoUser;
 
     @Autowired
     public GroupService(GroupRepo repoGroup,
-                        UserRepo repoUser) {
+                        UserRepository repoUser) {
         this.repoGroup = repoGroup;
         this.repoUser = repoUser;
     }
@@ -68,6 +68,8 @@ public class GroupService {
     public void deleteGroup(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         user.setGroups(null);
+        Optional<User> byUserName = repoUser.findByUserName(user.getUserName());
+        user.setRecordWpm(byUserName.orElse(user).getRecordWpm());
         repoUser.save(user);
     }
 }

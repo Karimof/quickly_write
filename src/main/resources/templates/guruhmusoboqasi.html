@@ -1,29 +1,32 @@
-<div th:fragment="content" style="min-height: 600px; background-color: white">
 
-    <h5 style="position: absolute;left: 300px">
-        <span th:text="#{groupName}"></span> : <span th:text="${gName}"></span><br>
-        <span th:text="#{groupPass}"></span> : <span th:text="${gPass}"></span>
-    </h5>
-    <!--    siz : <span th:text="${currentUser.getUserName}"></span>-->
-    <br>
-    <span th:text="#{groupMembers}"></span> :
-    <tr th:each="one: ${userNames}">
-        <td th:text="${one}"></td>
-    </tr>
+<div th:fragment="content" style="min-height: 600px; background-color: white; ">
 
-    <div
-            style=" text-align:center; width: 500px; margin-left: 420px; border-radius: 30px    ">
-        <p id="result"
-           style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
-        </p>
-    </div>
-    <!--TIMER-->
-    <div id="container" style="position: absolute; top: 100px">
-        <div id="countdown">
-            <canvas height="150" id="countdown360_countdown" width="150"><span aria-live="assertive" id="countdown-text"
-                                                                               role="status"></span></canvas>
+        <h5 style="position: absolute;left: 45%">
+            <span th:text="#{groupName}"></span> : <span th:text="${gName}"></span><br>
+            <span th:text="#{groupPass}"></span> : <span th:text="${gPass}"></span>
+        </h5>
+        <!--    siz : <span th:text="${currentUser.getUserName}"></span>-->
+        <br>
+        <span th:text="#{groupMembers}"></span> :<br>
+        <tr th:each="one: ${userNames}">
+            <td th:text="${one}"></td><br>
+        </tr>
+
+        <div
+                style=" text-align:center; width: 500px; margin-left: 420px; border-radius: 30px    ">
+            <p id="result"
+               style="border-radius:20px; font-family: Arial; padding-top: 20px;padding-bottom: 20px; font-size: 20pt">
+            </p>
         </div>
-    </div>
+
+    <!--TIMER-->
+<!--    <div id="container" style="position: absolute; top: 100px">-->
+        <div id="countdown">
+            <canvas height="150" id="countdown360_countdown" width="150">
+                <span aria-live="assertive" id="countdown-text" role="status"></span>
+            </canvas>
+        </div>
+<!--    </div>-->
 
     <div>
         <!--    INPUT FIELD-->
