@@ -5,6 +5,6 @@ RUN mvn clean package
 
 FROM openjdk:17
 WORKDIR /app
-COPY ./target/quickly_write_html-0.0.1-SNAPSHOT.jar app.jar
+COPY ./target app.jar
 EXPOSE 9090
 ENTRYPOINT ["java","-jar","/app.jar"]
