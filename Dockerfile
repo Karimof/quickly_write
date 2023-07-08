@@ -3,7 +3,7 @@
 #ADD /target/spring-boot-docker.jar spring-boot-docker.jar
 #ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
 
-FROM java:17
+FROM openjdk:17
 EXPOSE 9090
 VOLUME /tmp
 WORKDIR /quickly_write_html
