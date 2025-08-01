@@ -49,8 +49,8 @@ public class UserService {
 
     public boolean addUser(UserDto newUser,
                            Model model,
-                           MultipartHttpServletRequest multipart,
                            HttpServletRequest request
+
     ) throws IOException {
         String message = "";
         if (userRepo.existsUserByUserName(newUser.getUserName())) {
@@ -66,8 +66,8 @@ public class UserService {
 //            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //            String encodePassword = bCryptPasswordEncoder.encode(newUser.getPassword());
             Set<Role> roleSet = new HashSet<>();
-            Role byRolName = roleService.findByRolName(String.valueOf(ERole.ROLE_USER));
-            user = saveImage(multipart, user);
+            Role byRolName = roleService.findByRolName(String.valueOf(ERole.USER));
+//            user = saveImage(multipart, user);
             user.setFullName(newUser.getFullName());
             user.setUserName(newUser.getUserName());
             user.setEmail(newUser.getEmail());

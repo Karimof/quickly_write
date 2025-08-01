@@ -12,13 +12,8 @@
         <div class="col-md-2">
             <!--TIMER-->
             <img id="photo-label" width="172px" src="/images/photo-label.png"
-                 style="padding-top: 5px; padding-left: 3px">
+                 style="padding-top: 5px; padding-left: 3px; position: absolute">
             <div id="countdown"></div>
-            <div>
-                <a href="sinov">
-                    <img style="margin-top: -100%; width: 100px; margin-left: 20%;" src="/images/Refresh-circle.svg">
-                </a>
-            </div>
         </div>
         <div class="col-md-10" style="margin-left: 0">
             <!--    INPUT FIELD-->
@@ -49,6 +44,11 @@
                    th:text="${text}">
                 </p>
             </div>
+        </div>
+        <div class="col-md-2">
+            <a href="sinov">
+                <img style="width: 100px; margin-left: 20%" src="/images/Refresh-circle.svg">
+            </a>
         </div>
     </div>
 
@@ -127,6 +127,6 @@
             }
         });
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="../../static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+    <!--    <script src="../../static/plugins/progressBar/dist/jquery.countdown360.min.js"></script>-->
 </div>

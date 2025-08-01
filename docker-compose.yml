@@ -1,0 +1,29 @@
+#version: '3.8'
+#
+#services:
+#  postgres:
+#    image: postgres:15.2-alpine
+#    environment:
+#      POSTGRES_USER: 'postgres'
+#      POSTGRES_PASSWORD: '123'
+#      POSTGRES_DB: 'quickly_writing'
+#    ports:
+#      - "5432:5432"
+##    volumes:
+##      - postgres-data:/var/lib/postgresql/data
+#
+#  app:
+#    build: .
+#    ports:
+#      - "8080:9090"
+#    depends_on:
+#      - postgres
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-1:5432/quickly_writing
+#      SPRING_DATASOURCE_USERNAME: 'postgres'
+#      SPRING_DATASOURCE_PASSWORD: '123'
+#
+#volumes:
+#  postgres-data:
+#
+#
