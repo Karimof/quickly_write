@@ -57,7 +57,7 @@ public class UserController {
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
 
-        if (userService.addUser(newUser, model, multipart, request)) {
+        if (userService.addUser(newUser, model, request)) {
             redirectView.setUrl("index");
         } else {
             redirectView.setUrl("register_form");

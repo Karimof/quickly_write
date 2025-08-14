@@ -2,7 +2,9 @@
     <div align="center">
         <div style="margin-top: 10%; width: 300px">
             <span class="alert-danger" th:text="${plcSingIng}"></span>
+            <!--            formga id qo'shib ishlatish kerak ekan-->
             <form action="/login" method="post" enctype="multipart/form-data">
+                <!--            <form (ngSubmit)="submitForm()">-->
                 <h3 th:text="#{logFormHeader}"></h3>
                 <h5 align="center" style="color: red" th:text="${message}"></h5>
 

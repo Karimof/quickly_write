@@ -1,42 +1,24 @@
-FROM openjdk:17
-WORKDIR /quickly_write_html
-COPY target/spring-boot-docker.jar .
-EXPOSE 9090
-ENTRYPOINT ["java","-jar","spring-boot-docker.jar"]
 
-##FROM openjdk:17
-##EXPOSE 9090
-##ADD /target/spring-boot-docker.jar spring-boot-docker.jar
-##ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
-#
-#FROM openjdk:17
-#EXPOSE 9090
-#VOLUME /tmp
-#WORKDIR /quickly_write_html
-#
-#RUN apt-get update
-#RUN apt-get install -y maven
-#
-#ADD pom.xml /quickly_write_html/pom.xml
-#RUN ["mvn", "dependency:resolve"]
-#RUN ["mvn", "verify"]
-#
-## Adding source, compile and package into a fat jar
-#ADD src /quickly_write_html/src
-#RUN ["mvn", "package"]
-#
-#ADD target/spring-boot-docker.jar app.jar
-#RUN bash -c 'touch /app.jar'
-#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=container","-jar","/app.jar"]
-#
-##FROM openjdk:17
-##MAINTAINER baeldung.com
-##COPY /target/spring-boot-docker.jar spring-boot-docker.jar
-##ENTRYPOINT ["java","-jar","/spring-boot-docker.jar"]
-#
-##WORKDIR /app
-##COPY . /app/
-##
-##FROM openjdk:17
-##WORKDIR /app
-##COPY ./target app.jar
+# 1-bosqich: kodni build qilish
+FROM maven:3.9.4-eclipse-temurin-17 AS builder
+WORKDIR /app
+
+# 1.1. Dependency’larni cache qilish uchun avval pom.xml’ni nusxalaymiz
+COPY pom.xml .
+# 1.2. Kodni nusxalab olib, paketlaymiz
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# 2-bosqich: tayyor JAR’ni yengil jre tasviriga o‘tkazamiz
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+
+# Builder’dan chiqadigan target papkasidagi JAR’ni ko‘chiramiz
+COPY --from=builder /app/target/*.jar app.jar
+
+# APK portingizni e’lon qilamiz (masalan, 9090)
+EXPOSE 9090
+
+# Ilovani ishga tushiramiz
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
